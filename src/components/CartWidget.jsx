@@ -1,4 +1,4 @@
-function Carrito() {
+function CartWidget() {
   return (
     <div style={{ display: "flex", alignItems: "center" }}>
       <h4
@@ -16,4 +16,4 @@ function Carrito() {
     </div>
   );
 }
-export default Carrito;
+export default CartWidget;
