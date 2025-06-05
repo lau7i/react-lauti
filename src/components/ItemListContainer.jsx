@@ -1,4 +1,127 @@
-function Itemlistcontainer(props) {
-  return <p>{props.text}</p>;
+import { useState, useEffect } from "react";
+import ItemList from "./ItemList";
+
+const productos = [
+  {
+    id: "camiseta-titular-2024",
+    nombre: "Camiseta Titular Boca Juniors 2024",
+    precio: 129999.99,
+    imagen:
+      "https://acdn-us.mitiendanube.com/stores/001/150/754/products/img-20240823-wa0028-5f27a2fb7556e9cfb417244525148456-1024-1024.jpg",
+    categoria: "Camiseta",
+    descripcion:
+      "La camiseta oficial de Boca Juniors para la temporada 2024. Diseño icónico con el azul y oro que representa la pasión Xeneize. Tecnología AEROREADY para mantenerte fresco y seco en la cancha o en la tribuna.",
+  },
+  {
+    id: "camiseta-alternativa-2024",
+    nombre: "Camiseta Alternativa Boca Juniors 2024",
+    precio: 128999.99,
+    imagen:
+      "https://dcdn-us.mitiendanube.com/stores/001/949/148/products/whatsapp-image-2024-01-22-at-11-28-14-am-2-6cbc95efb47d6f050017059356683921-480-0.jpeg",
+    categoria: "Camiseta",
+    descripcion:
+      "Diseño audaz y moderno para la camiseta alternativa 2024 de Boca. Perfecta para destacar y mostrar tu apoyo al club. Edición limitada, ¡no te quedes sin la tuya!",
+  },
+  {
+    id: "pantalon-entrenamiento-2024",
+    nombre: "Pantalón de Entrenamiento Boca Juniors 2024",
+    precio: 115499.99,
+    imagen:
+      "https://www.dexter.com.ar/on/demandware.static/-/Sites-365-dabra-catalog/default/dw2c1db238/products/ADHY0386/ADHY0386-1.JPG",
+    categoria: "Pantalón",
+    descripcion:
+      "Pantalón de entrenamiento oficial usado por los jugadores de Boca. Confeccionado con tejido transpirable para máxima comodidad durante tus rutinas o en el día a día. Bolsillos con cierre y cintura elástica.",
+  },
+  {
+    id: "conjunto-presentacion-2024",
+    nombre: "Conjunto de Presentación Boca Juniors 2024",
+    precio: 142999.99,
+    imagen:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRizxHHVc8S7Y1X6hb_lU6bhTROP09P475rlg&s",
+    categoria: "Conjunto",
+    descripcion:
+      "El conjunto completo de presentación de Boca Juniors. Ideal para lucir el estilo Xeneize en cualquier ocasión. Chaqueta y pantalón a juego con el escudo bordado.",
+  },
+  {
+    id: "medias-oficiales",
+    nombre: "Medias Oficiales Boca Juniors",
+    precio: 15999.99,
+    imagen:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThsD-ERZWJ8qjAPCC0HszOpNd1ikg6DBM_TA&s",
+    categoria: "Accesorios",
+    descripcion:
+      "Medias de fútbol oficiales de Boca Juniors. Diseñadas para un ajuste perfecto y máxima comodidad, con amortiguación en zonas clave y tejido que dispersa la humedad.",
+  },
+  {
+    id: "bufanda-xeneize",
+    nombre: "Bufanda Tejida 'La Bombonera' Boca Juniors",
+    precio: 17499.99,
+    imagen:
+      "https://http2.mlstatic.com/D_NQ_NP_677186-MLA76336742446_052024-O.webp",
+    categoria: "Accesorios",
+    descripcion:
+      "Clásica bufanda tejida con los colores y el nombre 'La Bombonera'. Perfecta para llevar al estadio o para decorar tu espacio Xeneize. Muestra tu orgullo boquense.",
+  },
+  {
+    id: "camiseta-retro-90s",
+    nombre: "Camiseta Retro Boca Juniors Años 90",
+    precio: 135000.99,
+    imagen:
+      "https://acdn-us.mitiendanube.com/stores/001/376/099/products/img_223611-6dc57e133ab2d5c7c216412178547988-640-0.jpg",
+    categoria: "Camiseta",
+    descripcion:
+      "Viaja en el tiempo con esta réplica de la mítica camiseta de Boca Juniors de los años 90. Un clásico que evoca la época dorada del club. Ideal para coleccionistas y nostálgicos.",
+  },
+  {
+    id: "gorra-escudo",
+    nombre: "Gorra con Escudo Boca Juniors",
+    precio: 18999.99,
+    imagen: "https://http2.mlstatic.com/D_791141-MLA53111952541_122022-O.jpg",
+    categoria: "Accesorios",
+    descripcion:
+      "Gorra ajustable con el escudo de Boca Juniors bordado. Protege del sol con estilo y lleva al Xeneize siempre contigo. Talla única.",
+  },
+  {
+    id: "pantalon-corto-2024",
+    nombre: "Pantalón Corto Boca Juniors 2024",
+    precio: 113999.99,
+    imagen:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZvHni20X-mo_2TfnQH0-ypfyylM3RJ2F7GQ&s",
+    categoria: "Pantalón",
+    descripcion:
+      "Pantalón corto de Boca Juniors para la temporada 2024. Ligero y cómodo, ideal para tus partidos de fútbol o para uso casual en días calurosos. Escudo bordado.",
+  },
+  {
+    id: "conjunto-nino-2024",
+    nombre: "Conjunto Infantil Boca Juniors 2024",
+    precio: 129999.99,
+    imagen:
+      "https://www.stockcenter.com.ar/on/demandware.static/-/Sites-365-dabra-catalog/default/dw52ef1cc4/products/ADIP9642/ADIP9642-1.JPG",
+    categoria: "Conjunto",
+    descripcion:
+      "El kit perfecto para los pequeños hinchas. Conjunto de camiseta y pantalón corto para niños, con el diseño oficial de la temporada 2024. Tallas desde 2 años hasta 12 años.",
+  },
+];
+
+function ItemListContainer() {
+  const [items, setItems] = useState([]);
+  const getProductos = () =>
+    new Promise((resolve, reject) => {
+      if (productos.length) {
+        setTimeout(() => {
+          resolve(productos);
+        }, 1000);
+      } else {
+        reject("no hay productos disponibles");
+      }
+    });
+
+  useEffect(() => {
+    getProductos()
+      .then((res) => setItems(res))
+      .catch((err) => alert(err));
+  }, []);
+
+  return <ItemList items={items} />;
 }
-export default Itemlistcontainer;
+export default ItemListContainer;
