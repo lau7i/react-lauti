@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, NavLink } from "react-router";
+import { useParams } from "react-router";
 import ItemDetail from "./ItemDetail";
 
 function ItemDetailContainer() {
