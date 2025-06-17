@@ -1,39 +1,73 @@
 import CartWidget from "./CartWidget";
+import { NavLink } from "react-router";
+
 function Navbar() {
   return (
     <nav
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        width: "100%",
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        backgroundColor: "darkblue",
-        padding: "1rem 2rem",
-        color: "yellow",
-        boxShadow: " 0 4px 8px black",
-      }}
+      className="
+        fixed top-0 left-0 w-full flex justify-between items-center
+        bg-blue-900 text-yellow-400 p-4 shadow-lg z-50
+      "
     >
-      <h1
-        style={{ margin: 0, fontSize: " 1.8rem", textTransform: "uppercase " }}
-      >
+      <h1 className="text-2xl font-bold uppercase m-0 text-yellow-400 no-underline hover:text-yellow-300 transition duration-300">
         Tienda Lauti
       </h1>
-      <div style={{ display: "flex", gap: "20px" }}>
-        <a href="#" style={{ color: " white", fontSize: "1rem" }}>
+
+      <div className="flex gap-5">
+        <NavLink
+          to="/"
+          className={({ isActive }) =>
+            isActive
+              ? "text-yellow-300  font-bold "
+              : "text-white  hover:text-yellow-300 "
+          }
+        >
+          Todos
+        </NavLink>
+
+        <NavLink
+          to="/category/Camiseta"
+          className={({ isActive }) =>
+            isActive
+              ? "text-yellow-300  font-bold "
+              : "text-white  hover:text-yellow-300 "
+          }
+        >
           Camisetas
-        </a>
-        <a href="#" style={{ color: " white", fontSize: "1rem" }}>
+        </NavLink>
+
+        <NavLink
+          to="/category/Pantalón"
+          className={({ isActive }) =>
+            isActive
+              ? "text-yellow-300  font-bold "
+              : "text-white  hover:text-yellow-300 "
+          }
+        >
           Pantalones
-        </a>
-        <a href="#" style={{ color: " white", fontSize: "1rem" }}>
+        </NavLink>
+
+        <NavLink
+          to="/category/Conjunto"
+          className={({ isActive }) =>
+            isActive
+              ? "text-yellow-300  font-bold "
+              : "text-white  hover:text-yellow-300 "
+          }
+        >
           Conjuntos
-        </a>
-        <a href="#" style={{ color: " white", fontSize: "1rem" }}>
+        </NavLink>
+
+        <NavLink
+          to="/category/Accesorios"
+          className={({ isActive }) =>
+            isActive
+              ? "text-yellow-300  font-bold "
+              : "text-white  hover:text-yellow-300 "
+          }
+        >
           Accesorios
-        </a>
+        </NavLink>
       </div>
       <div>
         <CartWidget />

@@ -1,19 +1,16 @@
 function CartWidget() {
   return (
-    <div style={{ display: "flex", alignItems: "center" }}>
+    <div className="flex items-center">
       <h4
-        style={{
-          color: "white",
-          fontSize: "1.5rem",
-          display: "flex",
-          alignItems: "center",
-          gap: "5px",
-          paddingRight: "100px",
-        }}
+        className="
+          text-white text-2xl flex items-center gap-1
+          pr-24
+        "
       >
         Carrito 🛒4
       </h4>
     </div>
   );
 }
+
 export default CartWidget;
