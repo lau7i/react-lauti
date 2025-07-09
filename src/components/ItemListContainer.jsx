@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
+import { getProducts } from "../firebase/db";
 import ItemList from "./ItemList";
 
 function ItemListContainer() {
@@ -7,28 +8,9 @@ function ItemListContainer() {
   const { categoryName } = useParams();
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const res = await fetch("/db/data.json");
-        if (!res.ok) {
-          throw new Error(`HTTP error! status: ${res.status}`);
-        }
-        const allProducts = await res.json();
-
-        if (categoryName) {
-          const filteredProducts = allProducts.filter(
-            (prod) => prod.categoria === categoryName
-          );
-          setItems(filteredProducts);
-        } else {
-          setItems(allProducts);
-        }
-      } catch (error) {
-        console.error("Error filtering products:", error);
-      }
-    };
-
-    fetchProducts();
+    getProducts().then((products) => {
+      setItems(products);
+    });
   }, [categoryName]);
 
   return <ItemList items={items} />;

@@ -18,7 +18,7 @@ function ItemDetail({ product }) {
       <p className="text-gray-700 text-base leading-relaxed">
         {product.descripcion}
       </p>
-      <ItemCount />
+      <ItemCount item={product} />
       <NavLink
         to="/"
         className="inline-block mt-6 bg-gray-600 text-white px-4 py-2 rounded no-underline hover:bg-gray-700 transition duration-300"
