@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
-import { getProducts } from "../firebase/db";
+import { getProducts, getProductsByCategory } from "../firebase/db";
 import ItemList from "./ItemList";
 
 function ItemListContainer() {
@@ -8,9 +8,15 @@ function ItemListContainer() {
   const { categoryName } = useParams();
 
   useEffect(() => {
-    getProducts().then((products) => {
-      setItems(products);
-    });
+    if (categoryName) {
+      getProductsByCategory(categoryName).then((products) =>
+        setItems(products)
+      );
+    } else {
+      getProducts().then((products) => {
+        setItems(products);
+      });
+    }
   }, [categoryName]);
 
   return <ItemList items={items} />;
