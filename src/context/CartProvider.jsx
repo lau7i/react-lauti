@@ -4,32 +4,64 @@ import { CartContext } from "./CartContext";
 function CartProvider({ children }) {
   const [cart, setCart] = useState([]);
 
-  const agregarAlCarrito = (prod) => {
-    const isInCart = cart.some((item) => item.id === prod.id);
-    if (isInCart) {
-      const productoRepetido = cart.find((item) => item.id === prod.id);
-      const cartSinElProductoRepetido = cart.filter(
-        (item) => item.id !== prod.id
+  const agregarAlCarrito = (productoNuevo) => {
+    const productoEnCarrito = cart.find((item) => item.id === productoNuevo.id);
+    if (productoEnCarrito) {
+      const cartActualizado = cart.map((item) =>
+        item.id === productoNuevo.id
+          ? { ...item, count: item.count + productoNuevo.count }
+          : item
       );
-      setCart([
-        ...cartSinElProductoRepetido,
-        { ...productoRepetido, count: productoRepetido.count + prod.count },
-      ]);
+      setCart(cartActualizado);
     } else {
-      setCart([...cart, { ...prod, count: prod.count }]);
+      setCart([...cart, productoNuevo]);
     }
   };
 
   const getCantidad = () => {
-    const cantidades = cart.map((prod) => prod.count);
-    const cantidad = cantidades.reduce((acc, current) => acc + current, 0);
-    return cantidad;
+    return cart.reduce((acc, prod) => acc + prod.count, 0);
+  };
+
+  const getTotalPrice = () => {
+    return cart.reduce((acc, prod) => acc + prod.precio * prod.count, 0);
+  };
+
+  const removerDelCarrito = (id) => {
+    setCart(cart.filter((prod) => prod.id !== id));
+  };
+
+  const modificarCantidad = (itemId, cantidad) => {
+    const cartActualizado = cart
+      .map((prod) => {
+        if (prod.id === itemId) {
+          return { ...prod, count: prod.count + cantidad };
+        }
+        return prod;
+      })
+      .filter((prod) => prod.count > 0);
+
+    setCart(cartActualizado);
+  };
+
+  const clearCart = () => {
+    setCart([]);
   };
 
   return (
-    <CartContext.Provider value={{ cart, agregarAlCarrito, getCantidad }}>
+    <CartContext.Provider
+      value={{
+        cart,
+        agregarAlCarrito,
+        getCantidad,
+        getTotalPrice,
+        removerDelCarrito,
+        modificarCantidad,
+        clearCart,
+      }}
+    >
       {children}
     </CartContext.Provider>
   );
 }
+
 export default CartProvider;
