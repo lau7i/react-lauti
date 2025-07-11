@@ -1,13 +1,18 @@
 import { useState, useContext } from "react";
 import { CartContext } from "../context/CartContext";
+import { ToastContainer, toast } from "react-toastify";
 
 function ItemCount({ item, initial = 1 }) {
   const [count, setCount] = useState(initial);
   const { agregarAlCarrito } = useContext(CartContext);
 
+  const notify = () => toast("Producto agregado con exito!");
   const handleSumar = () => setCount(count + 1);
   const handleRestar = () => setCount(count - 1);
-  const handleAgregar = () => agregarAlCarrito({ ...item, count });
+  const handleAgregar = () => {
+    agregarAlCarrito({ ...item, count });
+    notify();
+  };
 
   return (
     <div>
@@ -53,6 +58,7 @@ function ItemCount({ item, initial = 1 }) {
         {" "}
         agregar al carrito{" "}
       </button>
+      <ToastContainer />
     </div>
   );
 }

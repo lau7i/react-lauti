@@ -2,6 +2,8 @@
 
 ¡Bienvenido a mi proyecto de e-commerce, construido con React y potenciado con las últimas tecnologías para ofrecer una experiencia de compra moderna y fluida!
 
+🚀 **Visita la tienda online aquí:** [tienda-lauti.netlify.app](https://tienda-lauti.netlify.app)
+
 ---
 
 ## 🚀 Funcionalidades Destacadas
@@ -33,6 +35,8 @@ Este proyecto fue desarrollado utilizando las siguientes herramientas y librerí
   - **Firestore:** Base de datos NoSQL en la nube para almacenar datos de productos y órdenes.
   - [Documentación de Firebase](https://firebase.google.com/docs)
   - [Documentación de Cloud Firestore](https://firebase.google.com/docs/firestore)
+  * **React-Toastify:** Una librería para añadir notificaciones "toast" personalizables y fáciles de usar en tu aplicación.
+    - [Documentación de React-Toastify](https://fkhadra.github.io/react-toastify/)
 
 ---
 
