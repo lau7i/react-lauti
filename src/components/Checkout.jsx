@@ -2,9 +2,13 @@ import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
 import { createOrder } from "../firebase/db";
 import { serverTimestamp } from "firebase/firestore";
+import { ToastContainer, toast } from "react-toastify";
 
 function Checkout() {
-  const { cart } = useContext(CartContext);
+  const { cart, clearCart } = useContext(CartContext);
+
+  const notify = () => toast("Orden de compra creada con exito!");
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -18,6 +22,8 @@ function Checkout() {
       products: cart,
       time: serverTimestamp(),
     });
+    notify();
+    clearCart();
   };
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4">
@@ -57,7 +63,7 @@ function Checkout() {
               Número de Teléfono
             </label>
             <input
-              type="tel"
+              type="text"
               id="telefono"
               required
               className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
@@ -73,6 +79,7 @@ function Checkout() {
           </button>
         </form>
       </div>
+      <ToastContainer />
     </div>
   );
 }

@@ -10,6 +10,7 @@ function CartContainer() {
     getTotalPrice,
     removerDelCarrito,
     modificarCantidad,
+    clearCart,
   } = useContext(CartContext);
 
   const navigate = useNavigate();
@@ -65,7 +66,7 @@ function CartContainer() {
               </div>
               <button
                 onClick={() => removerDelCarrito(prod.id)}
-                className="cursor-pointer text-white font-bold bg-red-500 rounded px-3 py-1 hover:bg-red-600"
+                className="cursor-pointer text-white font-bold bg-orange-500 rounded px-3 py-1 hover:bg-orange-600"
               >
                 Eliminar
               </button>
@@ -84,6 +85,12 @@ function CartContainer() {
           onClick={() => navigate("/checkout")}
         >
           Ir al Checkout
+        </button>
+        <button
+          onClick={clearCart}
+          className="cursor-pointer inline-block mt-4 mr-2 bg-orange-600 text-white px-4 py-2 rounded no-underline hover:bg-orange-700 transition duration-300"
+        >
+          Vaciar Carrito
         </button>
         <NavLink
           to="/"
